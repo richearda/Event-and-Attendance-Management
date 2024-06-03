@@ -20,7 +20,13 @@ namespace ETMS_API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
+            builder.Entity<EventCategory>()
+                .HasKey(e => e.CategoryId);
+
+            builder.Entity<Event>()
+                .HasKey(e => e.EventId);
+
             builder.Entity<EventCategoryMapping>()
             .HasKey(e => new { e.EventId, e.CategoryId });
 
@@ -37,6 +43,9 @@ namespace ETMS_API.Data
                 .HasOne(a => a.User)
                 .WithMany(u => u.AttendedEvents)
                 .HasForeignKey(a => a.UserId);
+
+            builder.Entity<Feedback>()
+                .HasKey(f => f.FeedbackId);
         }
     }
 }
