@@ -42,7 +42,9 @@ namespace ETMS_API.Data
             builder.Entity<Attendee>()
                 .HasOne(a => a.User)
                 .WithMany(u => u.AttendedEvents)
-                .HasForeignKey(a => a.UserId);
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+                
 
             builder.Entity<Feedback>()
                 .HasKey(f => f.FeedbackId);
