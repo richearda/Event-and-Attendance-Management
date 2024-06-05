@@ -72,6 +72,7 @@ namespace ETMS_API.Data.Repositories
             var evntToUpdate = await _dbContext.Events.FindAsync(@event.EventId);
             _dbContext.Entry(evntToUpdate).State = EntityState.Modified;
             _dbContext.SaveChangesAsync();
+            return evntToUpdate;
         }
     }
 }
