@@ -14,7 +14,7 @@ namespace ETMS_API.Data.Repositories
         public async Task<Attendee> AddAttendee(Attendee attendee)
         {
             await _dbContext.Attendees.AddAsync(attendee);
-            _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
             return attendee;
 
         }
@@ -65,10 +65,10 @@ namespace ETMS_API.Data.Repositories
         public async Task<Attendee> UpdateAttendee(Attendee attendee)
         {
             var attendeeToUpdate = await _dbContext.Attendees.FindAsync(attendee.AttendeeId);
-            if (attendeeToUpdate != null)
+            if (attendeeToUpdate is not null)
             {
                 _dbContext.Entry(attendeeToUpdate).State = EntityState.Modified;
-                _dbContext.SaveChangesAsync();              
+                await _dbContext.SaveChangesAsync();              
             }
             return attendeeToUpdate;
         }

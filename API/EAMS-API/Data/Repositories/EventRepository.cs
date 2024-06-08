@@ -14,7 +14,7 @@ namespace ETMS_API.Data.Repositories
         public async Task<Event> AddEvent(Event @event)
         {
              await _dbContext.Events.AddAsync(@event);
-            _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
             return @event;
         }
 
@@ -71,9 +71,13 @@ namespace ETMS_API.Data.Repositories
         public async Task<Event> UpdateEvent(Event @event)
         {
             var evntToUpdate = await _dbContext.Events.FindAsync(@event.EventId);
-            _dbContext.Entry(evntToUpdate).State = EntityState.Modified;
-            _dbContext.SaveChangesAsync();
+            if (evntToUpdate is not null)
+            {
+                _dbContext.Entry(evntToUpdate).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+            }
             return evntToUpdate;
+
         }
     }
 }

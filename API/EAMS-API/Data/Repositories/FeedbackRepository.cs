@@ -15,14 +15,14 @@ namespace ETMS_API.Data.Repositories
         public async Task AddFeedbackAsync(Feedback feedback)
         {
             await _dbContext.Feedbacks.AddAsync(feedback);
-            _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteFeedbackAsync(int feedbackId)
         {
             var feedbackToDelete = await _dbContext.Feedbacks.FindAsync(feedbackId);
              _dbContext.Feedbacks.Remove(feedbackToDelete);
-            _dbContext.SaveChangesAsync();
+           await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Feedback> GetByIdAsync(int feedbackId)
@@ -49,8 +49,12 @@ namespace ETMS_API.Data.Repositories
 
         public async Task UpdateFeedbackAsync(Feedback feedback)
         {
-            _dbContext.Entry(feedback).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();           
+            if (feedback is not null)
+            {
+                _dbContext.Entry(feedback).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+            }
+            
         }
     }
 }
