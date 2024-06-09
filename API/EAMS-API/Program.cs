@@ -3,6 +3,8 @@ using ETMS_API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using ETMS_API.Data.Repositories.Interfaces;
+using ETMS_API.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +23,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+//Repos
+builder.Services.AddScoped<IEventCategoryRepository, EventCategoryRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
