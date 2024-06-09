@@ -12,7 +12,7 @@ namespace ETMS_API.Data.Repositories.Interfaces
         Task<IEnumerable<Event>> GetPastEventsAsync();
         Task<bool> RegisterForEventAsync(int eventId, string userId);
         Task AddFeedbackAsync(int eventId, string userId, string comment, int rating);
-        Task<Event> AddEvent(Event @event);
+        Task<Event> AddEventAsync(Event @event);
         Task<Event> UpdateEvent(Event @event);
         void DeleteEvent(Event @event);
     }
