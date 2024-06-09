@@ -11,9 +11,9 @@ namespace ETMS_API.Data.Repositories
         {
             _dbContext = dbContext; 
         }
-        public async Task<Event> AddEvent(Event @event)
-        {
-             await _dbContext.Events.AddAsync(@event);
+        public async Task<Event> AddEventAsync(Event @event)
+        {          
+            await _dbContext.Events.AddAsync(@event);
             await _dbContext.SaveChangesAsync();
             return @event;
         }
