@@ -7,10 +7,11 @@ namespace ETMS_API.Data.Repositories
 {
     public class EventRepository : IEventRepository
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;       
         public EventRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext; 
+           
         }
         public async Task<Event> AddEventAsync(Event @event, CreateEventCategoryMappingDto eventCategory)
         {          
@@ -79,15 +80,41 @@ namespace ETMS_API.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Event> UpdateEvent(Event @event)
+        public async Task<Event> UpdateEventAsync(int eventId, Event @event, EventCategoryMapping eventCategory)
         {
-            var evntToUpdate = await _dbContext.Events.FindAsync(@event.EventId);
-            if (evntToUpdate is not null)
+            var evntToUpdate = await _dbContext.Events
+                                       .Include(e => e.EventCategoryMappings)
+                                       .FirstOrDefaultAsync(e => e.EventId == eventId);
+            if (evntToUpdate != null)
             {
-                _dbContext.Entry(evntToUpdate).State = EntityState.Modified;
+   
+                evntToUpdate.Title = @event.Title;
+                evntToUpdate.Description = @event.Description;
+                evntToUpdate.Date = @event.Date;
+                evntToUpdate.Time = @event.Time;
+                evntToUpdate.Location = @event.Location;
+                evntToUpdate.OrganizerId = @event.OrganizerId;
+                evntToUpdate.Capacity = @event.Capacity;
+
+             
+                var categoryMappingToUpdate = evntToUpdate.EventCategoryMappings
+                                                          .FirstOrDefault(ec => ec.EventCategoryMappingId == eventCategory.EventCategoryMappingId);
+                if (categoryMappingToUpdate != null)
+                {
+                    
+                    _dbContext.EventCategoriesMappings.Remove(categoryMappingToUpdate);
+                }
+                
+                    evntToUpdate.EventCategoryMappings.Add(new EventCategoryMapping
+                    {
+                        CategoryId = eventCategory.CategoryId,
+                        EventId = evntToUpdate.EventId
+                    });
+                            
+                
                 await _dbContext.SaveChangesAsync();
-            }
-            return evntToUpdate;
+                }
+                return @event;
 
         }
     }

@@ -14,7 +14,7 @@ namespace ETMS_API.Data.Repositories.Interfaces
         Task<bool> RegisterForEventAsync(int eventId, string userId);
         Task AddFeedbackAsync(int eventId, string userId, string comment, int rating);
         Task<Event> AddEventAsync(Event @event, CreateEventCategoryMappingDto eventCategory);
-        Task<Event> UpdateEvent(Event @event);
+        Task<Event> UpdateEventAsync(int eventId, Event @event, EventCategoryMapping eventCategory);
         void DeleteEvent(Event @event);
     }
 }
