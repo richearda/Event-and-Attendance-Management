@@ -1,9 +1,10 @@
-﻿using ETMS_API.Models;
+﻿using ETMS_API.DTOs.EventCategory;
+using ETMS_API.Models;
 
 namespace ETMS_API.DTOs.Event
 {
     public class CreateEventDto
-    {        
+    {
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
@@ -12,6 +13,6 @@ namespace ETMS_API.DTOs.Event
         public string OrganizerId { get; set; }       
         public int Capacity { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public int EventCategoryId { get; set; }
+        public CreateEventCategoryMappingDto EventCategory { get; set; }
     }
 }

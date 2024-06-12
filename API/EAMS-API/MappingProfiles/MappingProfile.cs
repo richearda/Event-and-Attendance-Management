@@ -11,6 +11,7 @@ namespace ETMS_API.MappingProfiles
         {
             CreateMap<CreateEventDto, Event>();
             CreateMap<CreateEventCategoryDto, EventCategory>();
+            CreateMap<CreateEventCategoryMappingDto, EventCategoryMapping>();
         }
     }
 }
