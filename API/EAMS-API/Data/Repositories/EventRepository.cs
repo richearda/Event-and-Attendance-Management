@@ -35,10 +35,11 @@ namespace ETMS_API.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async void DeleteEvent(Event @event)
+        public void DeleteEvent(int eventId)
         {
-            _dbContext.Events.Remove(@event);
-            await _dbContext.SaveChangesAsync();
+            var eventToDelete =  _dbContext.Events.Find(eventId);
+            _dbContext.Events.Remove(eventToDelete);
+            _dbContext.SaveChanges();
         }
 
         public async Task<Event> GetByIdAsync(int eventId)
