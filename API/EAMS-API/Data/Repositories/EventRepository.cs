@@ -1,4 +1,5 @@
 ﻿using ETMS_API.Data.Repositories.Interfaces;
+using ETMS_API.DTOs.EventCategory;
 using ETMS_API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,20 @@ namespace ETMS_API.Data.Repositories
         {
             _dbContext = dbContext; 
         }
-        public async Task<Event> AddEventAsync(Event @event)
+        public async Task<Event> AddEventAsync(Event @event, CreateEventCategoryMappingDto eventCategory)
         {          
             await _dbContext.Events.AddAsync(@event);
             await _dbContext.SaveChangesAsync();
+
+            var eventCategoryMapping = new EventCategoryMapping
+            {
+                EventId = @event.EventId,
+                CategoryId = eventCategory.CategoryId
+            };
+            //Insert the Id of Event and Category in EventCategoryMapping table.
+            await _dbContext.EventCategoriesMappings.AddAsync(eventCategoryMapping);
+            await _dbContext.SaveChangesAsync();
+
             return @event;
         }
 

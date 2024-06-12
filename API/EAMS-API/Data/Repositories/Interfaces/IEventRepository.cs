@@ -1,4 +1,5 @@
-﻿using ETMS_API.Models;
+﻿using ETMS_API.DTOs.EventCategory;
+using ETMS_API.Models;
 
 namespace ETMS_API.Data.Repositories.Interfaces
 {
@@ -12,7 +13,7 @@ namespace ETMS_API.Data.Repositories.Interfaces
         Task<IEnumerable<Event>> GetPastEventsAsync();
         Task<bool> RegisterForEventAsync(int eventId, string userId);
         Task AddFeedbackAsync(int eventId, string userId, string comment, int rating);
-        Task<Event> AddEventAsync(Event @event);
+        Task<Event> AddEventAsync(Event @event, CreateEventCategoryMappingDto eventCategory);
         Task<Event> UpdateEvent(Event @event);
         void DeleteEvent(Event @event);
     }
