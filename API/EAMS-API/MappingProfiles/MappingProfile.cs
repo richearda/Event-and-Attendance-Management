@@ -12,6 +12,8 @@ namespace ETMS_API.MappingProfiles
             CreateMap<CreateEventDto, Event>();
             CreateMap<CreateEventCategoryDto, EventCategory>();
             CreateMap<CreateEventCategoryMappingDto, EventCategoryMapping>();
+            CreateMap<UpdateEventDto, Event>().ReverseMap();
+            CreateMap<UpdateEventCategoryMappingDto, EventCategoryMapping>().ReverseMap();
         }
     }
 }
