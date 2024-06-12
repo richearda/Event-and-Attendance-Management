@@ -30,6 +30,18 @@ namespace ETMS_API.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromBody] UpdateEventDto eventDto)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var eventToUpdate = _mapper.Map<Event>(eventDto);
+            var eventCategoryToUpdate = _mapper.Map<EventCategoryMapping>(eventDto.EventCategory);
+            await _eventRepository.UpdateEventAsync(id, eventToUpdate, eventCategoryToUpdate);
+            return Ok(eventDto);
+        }
+
 
     }
 }
