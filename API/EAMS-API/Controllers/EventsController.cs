@@ -26,7 +26,7 @@ namespace ETMS_API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var eventToAdd = _mapper.Map<Event>(eventDto);
-            await _eventRepository.AddEventAsync(eventToAdd);
+            await _eventRepository.AddEventAsync(eventToAdd,eventDto.EventCategory);
             return Ok();
         }
 
