@@ -42,6 +42,14 @@ namespace ETMS_API.Controllers
             return Ok(eventDto);
         }
 
+        [HttpDelete]
+        [Route("{eventId}")]
+        public IActionResult DeleteEvent([FromRoute] int eventId)
+        {
+            _eventRepository.DeleteEvent(eventId);
+            return Ok();
+        }
+
 
     }
 }
