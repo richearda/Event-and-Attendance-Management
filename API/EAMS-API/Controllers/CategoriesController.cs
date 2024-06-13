@@ -29,6 +29,15 @@ namespace ETMS_API.Controllers
             await _eventCategoryRepository.AddCategoryAsync(categoryToAdd);
             return Ok(categoryToAdd);
         }
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateEventCategory([FromRoute] int id, [FromBody] UpdateEventCategoryDto categoryDto)
+        {
+
+            var categoryToUpdate = _mapper.Map<EventCategory>(categoryDto);
+            await _eventCategoryRepository.UpdateCategoryAsync(id,categoryToUpdate);
+            return Ok(categoryToUpdate);
+        }
 
     }
 }
