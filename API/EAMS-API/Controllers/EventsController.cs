@@ -49,7 +49,19 @@ namespace ETMS_API.Controllers
             _eventRepository.DeleteEvent(eventId);
             return Ok();
         }
-
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetEvent(int id)
+        {
+            var res = await _eventRepository.GetByIdAsync(id);
+            return Ok(res);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetEvents()
+        {
+            var res =await _eventRepository.GetEvents();
+            return Ok(res);
+        }
 
     }
 }
