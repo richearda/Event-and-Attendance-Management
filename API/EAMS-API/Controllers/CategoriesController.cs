@@ -38,6 +38,26 @@ namespace ETMS_API.Controllers
             await _eventCategoryRepository.UpdateCategoryAsync(id,categoryToUpdate);
             return Ok(categoryToUpdate);
         }
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteEventCategory(int id)
+        {
+            _eventCategoryRepository.DeleteCategoryAsync(id);
+            return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetCategories()
+        {
+            var res = await _eventCategoryRepository.GetAllCategoriesAsync();
+            return Ok(res);
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetCategory([FromRoute] int id)
+        {
+            var res = await _eventCategoryRepository.GetCategoryByIdAsync(id);
+            return Ok(res);
+        }
 
     }
 }
