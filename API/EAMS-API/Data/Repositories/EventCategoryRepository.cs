@@ -34,9 +34,11 @@ namespace ETMS_API.Data.Repositories
             return await _dbContext.EventCategories.FindAsync(categoryId);
         }
 
-        public async Task UpdateCategoryAsync(EventCategory category)
+        public async Task UpdateCategoryAsync(int id, EventCategory category)
         {
-            _dbContext.Entry(category).State = EntityState.Modified;
+            var categoryToUpdate = await _dbContext.EventCategories.FindAsync(id);
+            categoryToUpdate.CategoryName = category.CategoryName;
+            _dbContext.Entry(categoryToUpdate).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
             
         }
