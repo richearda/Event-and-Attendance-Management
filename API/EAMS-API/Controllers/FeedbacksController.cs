@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ETMS_API.Data.Repositories.Interfaces;
+using ETMS_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +45,25 @@ namespace ETMS_API.Controllers
         public async Task<IActionResult> GetFeedbackByAttendee(int id)
         {
             var res = await _feedbackRepository.GetFeedbackByAttendeeAsync(id);
+            return Ok(res);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddFeedback(Feedback feedback)
+        {
+            var res = _feedbackRepository.AddFeedbackAsync(feedback);
+            return Ok(res);
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateFeedback(Feedback feedback)
+        {
+            var res = _feedbackRepository.UpdateFeedbackAsync(feedback);
+            return Ok(res);
+        }
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteFeedback(int id)
+        {
+            var res = _feedbackRepository.DeleteFeedbackAsync(id);
             return Ok(res);
         }
 
