@@ -16,17 +16,28 @@ namespace ETMS_API.Data.Repositories
             await _dbContext.Attendees.AddAsync(attendee);
             await _dbContext.SaveChangesAsync();
             return attendee;
-
         }
 
-        public Task CheckInAsync(int attendeeId)
+        public async Task CheckInAsync(int attendeeId)
         {
-            throw new NotImplementedException();
+            var toUpdate = await _dbContext.Attendees.Where(a => a.AttendeeId == attendeeId).FirstAsync();
+            if(toUpdate is not null) 
+            {
+                toUpdate.CheckInTime = DateTime.Now;
+                _dbContext.Entry(toUpdate).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+            }
         }
-
-        public Task CheckOutAsync(int attendeeId)
+        
+        public async Task CheckOutAsync(int attendeeId)
         {
-            throw new NotImplementedException();
+            var toUpdate = await _dbContext.Attendees.Where(a => a.AttendeeId == attendeeId).FirstAsync();
+            if (toUpdate is not null)
+            {
+                toUpdate.CheckOutTime = DateTime.Now;
+                _dbContext.Entry(toUpdate).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async void DeleteAttendee(Attendee attendee)
