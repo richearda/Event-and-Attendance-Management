@@ -1,4 +1,5 @@
 ﻿using ETMS_API.Data.Repositories.Interfaces;
+using ETMS_API.DTOs.Attendee;
 using ETMS_API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,16 +47,19 @@ namespace ETMS_API.Data.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Event>> GetAttendedEventsAsync(int attendeeId)
+        public async Task<IEnumerable<Attendee>> GetAttendedEventsAsync(string userId)
         {
             //Need to fix later
-            var events = await _dbContext.Events.Include(e => e.Attendees)
+            var events = await _dbContext.Attendees
+                                .Include(e => e.Event)
+                                .Where(a => a.UserId == userId)
                                 .ToListAsync();
             return events;
-
+            
+            
         }
 
-        public async Task<IEnumerable<Feedback>> GetAttendeeFeedbacksAsync(int attendeeId)
+        public async Task<IEnumerable<Feedback>> GetAttendeeFeedbacksAsync(string userId)
         {
             //Need to fix later
             var feedbacks = await _dbContext.Feedbacks.ToListAsync();
