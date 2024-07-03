@@ -7,10 +7,13 @@ namespace ETMS_API.Data.Repositories
 {
     public class EventRepository : IEventRepository
     {
-        private readonly ApplicationDbContext _dbContext;       
-        public EventRepository(ApplicationDbContext dbContext)
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IFeedbackRepository _feedbackRepository;
+        
+        public EventRepository(ApplicationDbContext dbContext, IFeedbackRepository feedbackRepository)
         {
             _dbContext = dbContext; 
+            _feedbackRepository = feedbackRepository;
            
         }
         public async Task<Event> AddEventAsync(Event @event, CreateEventCategoryMappingDto eventCategory)
@@ -30,9 +33,9 @@ namespace ETMS_API.Data.Repositories
             return @event;
         }
 
-        public Task AddFeedbackAsync(int eventId, string userId, string comment, int rating)
+        public async Task AddEventFeedbackAsync(Feedback feedback)
         {
-            throw new NotImplementedException();
+            await _feedbackRepository.AddFeedbackAsync(feedback);
         }
 
         public void DeleteEvent(int eventId)
