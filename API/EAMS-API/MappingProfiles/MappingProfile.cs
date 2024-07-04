@@ -10,12 +10,18 @@ namespace ETMS_API.MappingProfiles
     {
         public MappingProfile()
         {
+            //Event Mapping
             CreateMap<CreateEventDto, Event>();
-            CreateMap<CreateEventCategoryDto, EventCategory>();
-            CreateMap<CreateEventCategoryMappingDto, EventCategoryMapping>();
             CreateMap<UpdateEventDto, Event>().ReverseMap();
+            CreateMap<EventDto, Event>()
+                .ForMember(dest => dest.Attendees, opt => opt.MapFrom(src => src.Attendees));
+            //Event Category Mapping
+            CreateMap<CreateEventCategoryDto, EventCategory>();
+            CreateMap<CreateEventCategoryMappingDto, EventCategoryMapping>();           
             CreateMap<UpdateEventCategoryMappingDto, EventCategoryMapping>().ReverseMap();
             CreateMap<UpdateEventCategoryDto, EventCategory>();
+
+            //Attendee Mapping
             CreateMap<CreateAttendeeDto, Attendee>();
             CreateMap<UpdateAttendeeDto, Attendee>();
             CreateMap<AttendedEventsDto,Attendee>()
@@ -27,7 +33,13 @@ namespace ETMS_API.MappingProfiles
                 .ForMember(dest => dest.Event.Location, opt => opt.MapFrom(src => src.Location))
                 .ForMember(dest => dest.Event.Organizer, opt => opt.MapFrom(src => src.Organizer))
                 .ForMember(dest => dest.CheckInTime, opt => opt.MapFrom(src => src.CheckInTime))
-                .ForMember(dest => dest.CheckOutTime, opt => opt.MapFrom(src => src.CheckOutTime)).ReverseMap();
+                .ForMember(dest => dest.CheckOutTime, opt => opt.MapFrom(src => src.CheckOutTime))
+                .ReverseMap();
+            CreateMap<AttendeeDto, Attendee>()
+                .ForMember(dest => dest.User.FullName, opt => opt.MapFrom(src => src.FullName))
+                .ForMember(dest => dest.User.Address, opt => opt.MapFrom(src => src.Address))
+                .ReverseMap();
+                
         }
     }
 }
