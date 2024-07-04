@@ -11,7 +11,7 @@ namespace ETMS_API.Data.Repositories.Interfaces
         Task<IEnumerable<Feedback>> GetEventFeedbacksAsync(int eventId);
         Task<IEnumerable<Event>> GetUpcomingEventsAsync();
         Task<IEnumerable<Event>> GetPastEventsAsync();
-        Task<bool> RegisterForEventAsync(int eventId, string userId);
+        Task RegisterForEventAsync(int eventId, string userId);
         Task AddEventFeedbackAsync(Feedback feedback);
         Task<Event> AddEventAsync(Event @event, CreateEventCategoryMappingDto eventCategory);
         Task<Event> UpdateEventAsync(int eventId, Event @event, EventCategoryMapping eventCategory);
