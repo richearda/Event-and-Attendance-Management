@@ -69,14 +69,20 @@ namespace ETMS_API.Data.Repositories
             return evnts;
         }
 
-        public Task<IEnumerable<Event>> GetPastEventsAsync()
+        public async Task<IEnumerable<Event>> GetPastEventsAsync()
         {
-            throw new NotImplementedException();
+           return await _dbContext
+                  .Events
+                  .Where(e => e.Date.Add(e.Time) < DateTime.Now)
+                  .ToListAsync();
         }
 
-        public Task<IEnumerable<Event>> GetUpcomingEventsAsync()
+        public async Task<IEnumerable<Event>> GetUpcomingEventsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext
+               .Events
+               .Where(e => e.Date.Add(e.Time) > DateTime.Now)
+               .ToListAsync();
         }
 
         public Task<bool> RegisterForEventAsync(int eventId, string userId)
