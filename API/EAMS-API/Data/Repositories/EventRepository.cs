@@ -9,11 +9,13 @@ namespace ETMS_API.Data.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IFeedbackRepository _feedbackRepository;
+        private readonly IAttendeeRepository _attendeeRepository;
         
-        public EventRepository(ApplicationDbContext dbContext, IFeedbackRepository feedbackRepository)
+        public EventRepository(ApplicationDbContext dbContext, IFeedbackRepository feedbackRepository, IAttendeeRepository attendeeRepository)
         {
             _dbContext = dbContext; 
             _feedbackRepository = feedbackRepository;
+            _attendeeRepository = attendeeRepository;
            
         }
         public async Task<Event> AddEventAsync(Event @event, CreateEventCategoryMappingDto eventCategory)
@@ -85,9 +87,15 @@ namespace ETMS_API.Data.Repositories
                .ToListAsync();
         }
 
-        public Task<bool> RegisterForEventAsync(int eventId, string userId)
+        public async Task RegisterForEventAsync(int eventId, string userId)
         {
-            throw new NotImplementedException();
+            var attendee = new Attendee
+            {
+                EventId = eventId,
+                UserId = userId
+            };
+             await _attendeeRepository.AddAttendee(attendee);
+            
         }
 
         public async Task<Event> UpdateEventAsync(int eventId, Event @event, EventCategoryMapping eventCategory)
