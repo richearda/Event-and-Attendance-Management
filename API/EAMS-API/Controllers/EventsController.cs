@@ -62,6 +62,13 @@ namespace ETMS_API.Controllers
             var res =await _eventRepository.GetEvents();
             return Ok(res);
         }
+        [HttpPost]
+        [Route("{id}/Feedback")]
+        public async Task<IActionResult> AddEventFeedback([FromRoute] int id, [FromBody] Feedback feedback)
+        {
+             await _eventRepository.AddEventFeedbackAsync(id, feedback);
+            return Ok();
+        }
 
     }
 }
