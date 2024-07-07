@@ -32,7 +32,7 @@ namespace ETMS_API.Controllers
         public async Task<IActionResult> UpdateAttendee([FromRoute] int id, UpdateAttendeeDto attendee)
         {
             var attendeeModel = _mapper.Map<Attendee>(attendee);
-            await _attendeeRepository.UpdateAttendee(attendeeModel);
+            await _attendeeRepository.UpdateAttendee(id,attendeeModel);
             return Ok(attendeeModel);
         }
 
