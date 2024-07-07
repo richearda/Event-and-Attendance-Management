@@ -35,6 +35,19 @@ namespace ETMS_API.Controllers
             await _attendeeRepository.UpdateAttendee(id,attendeeModel);
             return Ok(attendeeModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAttendees()
+        {
+            var res = await _attendeeRepository.GetAttendeesAsync();
+            return Ok(res);
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetAttendee([FromRoute] int id)
+        {
+            var res = await _attendeeRepository.GetByIdAsync(id);
+            return Ok(res);
+        }
 
     }
 }
