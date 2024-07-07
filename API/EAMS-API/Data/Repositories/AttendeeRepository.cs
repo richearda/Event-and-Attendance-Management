@@ -77,12 +77,17 @@ namespace ETMS_API.Data.Repositories
             return attendee;
         }
 
-        public async Task<Attendee> UpdateAttendee(Attendee attendee)
+        public async Task<Attendee> UpdateAttendee(int attendeeId, Attendee attendee)
         {
-            var attendeeToUpdate = await _dbContext.Attendees.FindAsync(attendee.AttendeeId);
+            var attendeeToUpdate = await _dbContext.Attendees.FindAsync(attendeeId);
             if (attendeeToUpdate is not null)
             {
-                _dbContext.Entry(attendeeToUpdate).State = EntityState.Modified;
+                attendeeToUpdate.UserId = attendee.UserId;
+                attendeeToUpdate.EventId = attendee.EventId;
+                attendeeToUpdate.IsCheckedIn = attendee.IsCheckedIn;
+                attendeeToUpdate.CheckInTime = attendee.CheckInTime;
+                attendeeToUpdate.CheckOutTime = attendee.CheckOutTime;
+                
                 await _dbContext.SaveChangesAsync();              
             }
             return attendeeToUpdate;
