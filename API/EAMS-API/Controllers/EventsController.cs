@@ -69,6 +69,12 @@ namespace ETMS_API.Controllers
              await _eventRepository.AddEventFeedbackAsync(id, feedback);
             return Ok();
         }
-
+        [HttpPost]
+        [Route("{eventId}/Register/{userId}")]
+        public async Task<IActionResult> RegisterForEvent([FromRoute] int eventId, string userId)
+        {
+            await _eventRepository.RegisterForEventAsync(eventId, userId);
+            return Ok();
+        }
     }
 }
