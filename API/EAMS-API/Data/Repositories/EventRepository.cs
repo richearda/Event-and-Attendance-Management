@@ -35,7 +35,7 @@ namespace ETMS_API.Data.Repositories
             return @event;
         }
 
-        public async Task AddEventFeedbackAsync(int eventId, Feedback feedback)
+        public async Task<Feedback> AddEventFeedbackAsync(int eventId, Feedback feedback)
         {
             var @event = await _dbContext.Events.FindAsync(eventId);
             if(@event is not null)
@@ -44,7 +44,7 @@ namespace ETMS_API.Data.Repositories
 
             }
             await _dbContext.SaveChangesAsync();
-            return true;
+            return feedback;
         }
 
         public void DeleteEvent(int eventId)
