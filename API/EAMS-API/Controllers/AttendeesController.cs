@@ -55,5 +55,12 @@ namespace ETMS_API.Controllers
             var res = await _attendeeRepository.GetAttendeeFeedbacksAsync(id);
             return Ok(res);
         }
+        [HttpGet]
+        [Route("{id}/Events")]
+        public async Task<IActionResult> GetAttendedEvents(string id)
+        {
+            var res = await _attendeeRepository.GetAttendedEventsAsync(id);
+            return Ok(res);
+        }
     }
 }
