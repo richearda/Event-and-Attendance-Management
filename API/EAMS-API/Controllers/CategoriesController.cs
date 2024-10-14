@@ -20,6 +20,9 @@ namespace ETMS_API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Add a category
+        /// </summary>      
         [HttpPost]
         public async Task<IActionResult> CreateEventCategory([FromBody] CreateEventCategoryDto categoryDto)
         {
@@ -29,6 +32,9 @@ namespace ETMS_API.Controllers
             await _eventCategoryRepository.AddCategoryAsync(categoryToAdd);
             return Ok(categoryToAdd);
         }
+        /// <summary>
+        /// Update a category
+        /// </summary>
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> UpdateEventCategory([FromRoute] int id, [FromBody] UpdateEventCategoryDto categoryDto)
@@ -38,6 +44,9 @@ namespace ETMS_API.Controllers
             await _eventCategoryRepository.UpdateCategoryAsync(id,categoryToUpdate);
             return Ok(categoryToUpdate);
         }
+        /// <summary>
+        /// Delete a category by id
+        /// </summary>
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteEventCategory(int id)
@@ -45,12 +54,18 @@ namespace ETMS_API.Controllers
             _eventCategoryRepository.DeleteCategoryAsync(id);
             return Ok();
         }
+        /// <summary>
+        /// Get all categories
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {
             var res = await _eventCategoryRepository.GetAllCategoriesAsync();
             return Ok(res);
         }
+        /// <summary>
+        /// Get category by id
+        /// </summary>
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetCategory([FromRoute] int id)
