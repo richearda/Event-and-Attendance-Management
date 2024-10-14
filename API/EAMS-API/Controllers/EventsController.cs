@@ -19,7 +19,9 @@ namespace ETMS_API.Controllers
             _eventRepository = eventRepository;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// Add an event
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> CreateEvent([FromBody] CreateEventDto eventDto)
         {
@@ -29,7 +31,9 @@ namespace ETMS_API.Controllers
             await _eventRepository.AddEventAsync(eventToAdd,eventDto.EventCategory);
             return Ok();
         }
-
+        /// <summary>
+        /// Update an event
+        /// </summary>
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromBody] UpdateEventDto eventDto)
@@ -41,7 +45,9 @@ namespace ETMS_API.Controllers
             await _eventRepository.UpdateEventAsync(id, eventToUpdate, eventCategoryToUpdate);
             return Ok(eventDto);
         }
-
+        /// <summary>
+        /// Delete an event by id
+        /// </summary>
         [HttpDelete]
         [Route("{eventId}")]
         public IActionResult DeleteEvent([FromRoute] int eventId)
@@ -49,6 +55,9 @@ namespace ETMS_API.Controllers
             _eventRepository.DeleteEvent(eventId);
             return Ok();
         }
+        /// <summary>
+        /// Get an event by id
+        /// </summary>
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetEvent(int id)
@@ -56,12 +65,18 @@ namespace ETMS_API.Controllers
             var res = await _eventRepository.GetByIdAsync(id);
             return Ok(res);
         }
+        /// <summary>
+        /// Get all events
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetEvents()
         {
             var res =await _eventRepository.GetEvents();
             return Ok(res);
         }
+        /// <summary>
+        /// Add event feedback
+        /// </summary>
         [HttpPost]
         [Route("{id}/Feedback")]
         public async Task<IActionResult> AddEventFeedback([FromRoute] int id, [FromBody] Feedback feedback)
@@ -69,6 +84,9 @@ namespace ETMS_API.Controllers
              await _eventRepository.AddEventFeedbackAsync(id, feedback);
             return Ok();
         }
+        /// <summary>
+        /// Register an attendee for event
+        /// </summary>
         [HttpPost]
         [Route("{eventId}/Register/{userId}")]
         public async Task<IActionResult> RegisterForEvent([FromRoute] int eventId, string userId)
