@@ -62,5 +62,12 @@ namespace ETMS_API.Controllers
             var res = await _attendeeRepository.GetAttendedEventsAsync(id);
             return Ok(res);
         }
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult DeleteAttendee(int id)
+        {
+            _attendeeRepository.DeleteAttendee(id);
+            return Ok();
+        }
     }
 }

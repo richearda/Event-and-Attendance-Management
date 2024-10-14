@@ -11,7 +11,7 @@ namespace ETMS_API.Data.Repositories.Interfaces
         Task<IEnumerable<Feedback>> GetAttendeeFeedbacksAsync(string userId);
         Task<Attendee> AddAttendee(Attendee attendee);
         Task<Attendee> UpdateAttendee(int attendeeId, Attendee attendee);
-        void DeleteAttendee(Attendee attendee);
+        void DeleteAttendee(int attendeeId);
         Task CheckInAsync(int attendeeId);
         Task CheckOutAsync(int attendeeId);
     }

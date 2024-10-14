@@ -44,9 +44,10 @@ namespace ETMS_API.Data.Repositories
             }
         }
 
-        public async void DeleteAttendee(Attendee attendee)
+        public async void DeleteAttendee(int id)
         {
-            _dbContext.Attendees.Remove(attendee);
+            var attendeeToDelete = _dbContext.Attendees.Find(id);
+            _dbContext.Attendees.Remove(attendeeToDelete);
             await _dbContext.SaveChangesAsync();
         }
 
