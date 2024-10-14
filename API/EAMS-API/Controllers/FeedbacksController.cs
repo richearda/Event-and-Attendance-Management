@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/feedbacks")]
     [ApiController]
     [Produces("application/json")]
     public class FeedbacksController : ControllerBase
