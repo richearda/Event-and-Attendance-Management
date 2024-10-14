@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/events")]
     [ApiController]
     [Produces("application/json")]
     public class EventsController : ControllerBase
@@ -78,7 +78,7 @@ namespace ETMS_API.Controllers
         /// Add event feedback
         /// </summary>
         [HttpPost]
-        [Route("{id}/Feedback")]
+        [Route("{id}/feedback")]
         public async Task<IActionResult> AddEventFeedback([FromRoute] int id, [FromBody] Feedback feedback)
         {
              await _eventRepository.AddEventFeedbackAsync(id, feedback);
@@ -88,7 +88,7 @@ namespace ETMS_API.Controllers
         /// Register an attendee for event
         /// </summary>
         [HttpPost]
-        [Route("{eventId}/Register/{userId}")]
+        [Route("{eventId}/register/{userId}")]
         public async Task<IActionResult> RegisterForEvent([FromRoute] int eventId, string userId)
         {
             await _eventRepository.RegisterForEventAsync(eventId, userId);
