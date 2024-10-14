@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/attendees")]
     [ApiController]
     [Produces("application/json")]
     public class AttendeesController : ControllerBase
@@ -64,7 +64,7 @@ namespace ETMS_API.Controllers
         /// Get the feedbacks of specific attendee
         /// </summary>
         [HttpGet]
-        [Route("{id}/Feedbacks")]
+        [Route("{id}/feedbacks")]
         public async Task<IActionResult> GetAttendeeFeedbacks(string id)
         {
             var res = await _attendeeRepository.GetAttendeeFeedbacksAsync(id);
@@ -74,7 +74,7 @@ namespace ETMS_API.Controllers
         /// Get the attended events of a specific attendee
         /// </summary>
         [HttpGet]
-        [Route("{id}/Events")]
+        [Route("{id}/events")]
         public async Task<IActionResult> GetAttendedEvents(string id)
         {
             var res = await _attendeeRepository.GetAttendedEventsAsync(id);
