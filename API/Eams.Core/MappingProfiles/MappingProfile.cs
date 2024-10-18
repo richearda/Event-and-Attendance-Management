@@ -18,14 +18,14 @@ namespace Eams.Core.MappingProfiles
             CreateMap<EventDto, Event>()
                 .ForMember(dest => dest.Attendees, opt => opt.MapFrom(src => src.Attendees));
             //Event Category Mapping
-            CreateMap<CreateEventCategoryDto, EventCategory>();
-            CreateMap<CreateEventCategoryMappingDto, EventCategoryMapping>();
+            CreateMap<CreateEventCategoryDto, EventCategory>().ReverseMap();
+            CreateMap<CreateEventCategoryMappingDto, EventCategoryMapping>().ReverseMap();
             CreateMap<UpdateEventCategoryMappingDto, EventCategoryMapping>().ReverseMap();
             CreateMap<UpdateEventCategoryDto, EventCategory>();
 
             //Attendee Mapping
-            CreateMap<CreateAttendeeDto, Attendee>();
-            CreateMap<UpdateAttendeeDto, Attendee>();
+            CreateMap<CreateAttendeeDto, Attendee>().ReverseMap();
+            CreateMap<UpdateAttendeeDto, Attendee>().ReverseMap();
             CreateMap<AttendedEventsDto, Attendee>()
                 .ForMember(dest => dest.AttendeeId, opt => opt.MapFrom(src => src.AttendeeId))
                 .ForMember(dest => dest.EventId, opt => opt.MapFrom(src => src.EventId))

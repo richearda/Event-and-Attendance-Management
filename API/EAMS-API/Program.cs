@@ -1,3 +1,4 @@
+using Eams.Core.MappingProfiles;
 using Eams.Data;
 using Eams.Data.Repositories;
 using Eams.Data.Repositories.Interfaces;
@@ -28,7 +29,7 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 //Automapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 //Repos
 builder.Services.AddScoped<IEventCategoryRepository, EventCategoryRepository>();
