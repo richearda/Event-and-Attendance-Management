@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using ETMS_API.Data.Repositories.Interfaces;
-using ETMS_API.DTOs.Attendee;
-using ETMS_API.Models;
-using Microsoft.AspNetCore.Http;
+using Eams.Core.Domain;
+using Eams.Core.DTOs.Attendee;
+using Eams.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
@@ -38,7 +37,7 @@ namespace ETMS_API.Controllers
         public async Task<IActionResult> UpdateAttendee([FromRoute] int id, UpdateAttendeeDto attendee)
         {
             var attendeeModel = _mapper.Map<Attendee>(attendee);
-            await _attendeeRepository.UpdateAttendee(id,attendeeModel);
+            await _attendeeRepository.UpdateAttendee(id, attendeeModel);
             return Ok(attendeeModel);
         }
         /// <summary>

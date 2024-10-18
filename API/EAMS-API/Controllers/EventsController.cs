@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using ETMS_API.Data.Repositories.Interfaces;
-using ETMS_API.DTOs.Event;
-using ETMS_API.Models;
-using Microsoft.AspNetCore.Http;
+using Eams.Core.Domain;
+using Eams.Core.DTOs.Event;
+using Eams.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
@@ -28,7 +27,7 @@ namespace ETMS_API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var eventToAdd = _mapper.Map<Event>(eventDto);
-            await _eventRepository.AddEventAsync(eventToAdd,eventDto.EventCategory);
+            await _eventRepository.AddEventAsync(eventToAdd, eventDto.EventCategory);
             return Ok();
         }
         /// <summary>
@@ -38,7 +37,7 @@ namespace ETMS_API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromBody] UpdateEventDto eventDto)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var eventToUpdate = _mapper.Map<Event>(eventDto);
             var eventCategoryToUpdate = _mapper.Map<EventCategoryMapping>(eventDto.EventCategory);
@@ -71,7 +70,7 @@ namespace ETMS_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEvents()
         {
-            var res =await _eventRepository.GetEvents();
+            var res = await _eventRepository.GetEvents();
             return Ok(res);
         }
         /// <summary>
@@ -81,7 +80,7 @@ namespace ETMS_API.Controllers
         [Route("{id}/feedback")]
         public async Task<IActionResult> AddEventFeedback([FromRoute] int id, [FromBody] Feedback feedback)
         {
-             await _eventRepository.AddEventFeedbackAsync(id, feedback);
+            await _eventRepository.AddEventFeedbackAsync(id, feedback);
             return Ok();
         }
         /// <summary>

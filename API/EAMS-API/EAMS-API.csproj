@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>ETMS_API</RootNamespace>
+    <RootNamespace>EAMS_API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +17,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Eams.Core\Eams.Core.csproj" />
+    <ProjectReference Include="..\Eams.Data\Eams.Data.csproj" />
+    <ProjectReference Include="..\Eams.Services\Eams.Services.csproj" />
   </ItemGroup>
 
 	<PropertyGroup>

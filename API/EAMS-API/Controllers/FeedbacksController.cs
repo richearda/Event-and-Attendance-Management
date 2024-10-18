@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using ETMS_API.Data.Repositories.Interfaces;
-using ETMS_API.Models;
-using Microsoft.AspNetCore.Http;
+using Eams.Core.Domain;
+using Eams.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers

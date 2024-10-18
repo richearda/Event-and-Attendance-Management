@@ -3,4 +3,7 @@
 GET {{ETMS_API_HostAddress}}/weatherforecast/
 Accept: application/json
 
+GET {{ETMS_API_HostAddress}}/categories/
+Accept: application/json
+
 ###

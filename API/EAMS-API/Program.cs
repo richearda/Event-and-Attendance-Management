@@ -1,10 +1,8 @@
-using ETMS_API.Data;
-using ETMS_API.Models;
+using Eams.Data;
+using Eams.Data.Repositories;
+using Eams.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using ETMS_API.Data.Repositories.Interfaces;
-using ETMS_API.Data.Repositories;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using ETMS_API.Data.Repositories.Interfaces;
-using ETMS_API.DTOs.EventCategory;
-using ETMS_API.Models;
-using Microsoft.AspNetCore.Http;
+using Eams.Core.Domain;
+using Eams.Core.DTOs.EventCategory;
+using Eams.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
@@ -26,7 +25,7 @@ namespace ETMS_API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateEventCategory([FromBody] CreateEventCategoryDto categoryDto)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var categoryToAdd = _mapper.Map<EventCategory>(categoryDto);
             await _eventCategoryRepository.AddCategoryAsync(categoryToAdd);
@@ -41,7 +40,7 @@ namespace ETMS_API.Controllers
         {
 
             var categoryToUpdate = _mapper.Map<EventCategory>(categoryDto);
-            await _eventCategoryRepository.UpdateCategoryAsync(id,categoryToUpdate);
+            await _eventCategoryRepository.UpdateCategoryAsync(id, categoryToUpdate);
             return Ok(categoryToUpdate);
         }
         /// <summary>
