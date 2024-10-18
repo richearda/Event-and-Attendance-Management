@@ -1,0 +1,6 @@
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net6.0\Eams.Core.csproj.AssemblyReference.cache
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net6.0\Eams.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net6.0\Eams.Core.AssemblyInfoInputs.cache
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net6.0\Eams.Core.AssemblyInfo.cs
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net6.0\Eams.Core.csproj.CoreCompileInputs.cache
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net6.0\Eams.Core.sourcelink.json

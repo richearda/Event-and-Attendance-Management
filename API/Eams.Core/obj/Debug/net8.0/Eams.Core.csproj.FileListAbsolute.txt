@@ -1,0 +1,13 @@
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.csproj.AssemblyReference.cache
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.AssemblyInfoInputs.cache
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.AssemblyInfo.cs
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.csproj.CoreCompileInputs.cache
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.sourcelink.json
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\bin\Debug\net8.0\Eams.Core.deps.json
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\bin\Debug\net8.0\Eams.Core.dll
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\bin\Debug\net8.0\Eams.Core.pdb
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.dll
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\refint\Eams.Core.dll
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\Eams.Core.pdb
+C:\Users\RICHE\Desktop\Portfolio Projects\Event and Attendance Management System\API\Eams.Core\obj\Debug\net8.0\ref\Eams.Core.dll
