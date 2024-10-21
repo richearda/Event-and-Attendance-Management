@@ -2,6 +2,7 @@
 using Eams.Core.Domain;
 using Eams.Core.DTOs.Attendee;
 using Eams.Data.Repositories.Interfaces;
+using Eams.Services.Attendee.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
@@ -11,12 +12,12 @@ namespace ETMS_API.Controllers
     [Produces("application/json")]
     public class AttendeesController : ControllerBase
     {
-        private readonly IAttendeeRepository _attendeeRepository;
+        private readonly IAttendeeService _attendeeService;
         private readonly IMapper _mapper;
 
-        public AttendeesController(IAttendeeRepository attendeeRepository, IMapper mapper)
+        public AttendeesController(IAttendeeService attendeeService, IMapper mapper)
         {
-            _attendeeRepository = attendeeRepository;
+            _attendeeService = attendeeService;
             _mapper = mapper;
         }
 
@@ -27,7 +28,7 @@ namespace ETMS_API.Controllers
         public async Task<IActionResult> CreateAttendee(CreateAttendeeDto attendee)
         {
             var attendeeModel = _mapper.Map<Attendee>(attendee);
-            await _attendeeRepository.AddAttendee(attendeeModel);
+            await _attendeeService.AddAttendee(attendeeModel);
             return Ok(attendeeModel);
         }
         /// <summary>
@@ -37,7 +38,7 @@ namespace ETMS_API.Controllers
         public async Task<IActionResult> UpdateAttendee([FromRoute] int id, UpdateAttendeeDto attendee)
         {
             var attendeeModel = _mapper.Map<Attendee>(attendee);
-            await _attendeeRepository.UpdateAttendee(id, attendeeModel);
+            await _attendeeService.UpdateAttendee(id, attendeeModel);
             return Ok(attendeeModel);
         }
         /// <summary>
@@ -46,7 +47,7 @@ namespace ETMS_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAttendees()
         {
-            var res = await _attendeeRepository.GetAttendeesAsync();
+            var res = await _attendeeService.GetAttendeesAsync();
             return Ok(res);
         }
         /// <summary>
@@ -56,7 +57,7 @@ namespace ETMS_API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetAttendee([FromRoute] int id)
         {
-            var res = await _attendeeRepository.GetByIdAsync(id);
+            var res = await _attendeeService.GetAttendeeByIdAsync(id);
             return Ok(res);
         }
         /// <summary>
@@ -66,7 +67,7 @@ namespace ETMS_API.Controllers
         [Route("{id}/feedbacks")]
         public async Task<IActionResult> GetAttendeeFeedbacks(string id)
         {
-            var res = await _attendeeRepository.GetAttendeeFeedbacksAsync(id);
+            var res = await _attendeeService.GetAttendeeFeedbacksAsync(id);
             return Ok(res);
         }
         /// <summary>
@@ -76,7 +77,7 @@ namespace ETMS_API.Controllers
         [Route("{id}/events")]
         public async Task<IActionResult> GetAttendedEvents(string id)
         {
-            var res = await _attendeeRepository.GetAttendedEventsAsync(id);
+            var res = await _attendeeService.GetAttendedEventsAsync(id);
             return Ok(res);
         }
         /// <summary>
@@ -86,7 +87,7 @@ namespace ETMS_API.Controllers
         [Route("{id}")]
         public IActionResult DeleteAttendee(int id)
         {
-            _attendeeRepository.DeleteAttendee(id);
+            _attendeeService.DeleteAttendee(id);
             return Ok();
         }
     }
