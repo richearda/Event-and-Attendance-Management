@@ -2,6 +2,8 @@ using Eams.Core.MappingProfiles;
 using Eams.Data;
 using Eams.Data.Repositories;
 using Eams.Data.Repositories.Interfaces;
+using Eams.Services.Attendee;
+using Eams.Services.Attendee.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -36,6 +38,9 @@ builder.Services.AddScoped<IEventCategoryRepository, EventCategoryRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 builder.Services.AddScoped<IAttendeeRepository, AttendeeRepository>();
+
+//Services
+builder.Services.AddScoped<IAttendeeService, AttendeeService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
