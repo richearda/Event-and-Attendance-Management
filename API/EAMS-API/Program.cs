@@ -41,6 +41,7 @@ builder.Services.AddScoped<IAttendeeRepository, AttendeeRepository>();
 
 //Services
 builder.Services.AddScoped<IAttendeeService, AttendeeService>();
+builder.Services.AddScoped<IEventService, EventService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
