@@ -2,6 +2,7 @@
 using Eams.Core.Domain;
 using Eams.Core.DTOs.Event;
 using Eams.Data.Repositories.Interfaces;
+using Eams.Services.Attendee.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
@@ -11,11 +12,11 @@ namespace ETMS_API.Controllers
     [Produces("application/json")]
     public class EventsController : ControllerBase
     {
-        private readonly IEventRepository _eventRepository;
+        private readonly IEventService _eventService;
         private readonly IMapper _mapper;
-        public EventsController(IEventRepository eventRepository, IMapper mapper)
+        public EventsController(IEventService eventService, IMapper mapper)
         {
-            _eventRepository = eventRepository;
+            _eventService = eventService;
             _mapper = mapper;
         }
         /// <summary>
@@ -27,7 +28,7 @@ namespace ETMS_API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var eventToAdd = _mapper.Map<Event>(eventDto);
-            await _eventRepository.AddEventAsync(eventToAdd, eventDto.EventCategory);
+            await _eventService.AddEventAsync(eventToAdd, eventDto.EventCategory);
             return Ok();
         }
         /// <summary>
@@ -41,7 +42,7 @@ namespace ETMS_API.Controllers
                 return BadRequest(ModelState);
             var eventToUpdate = _mapper.Map<Event>(eventDto);
             var eventCategoryToUpdate = _mapper.Map<EventCategoryMapping>(eventDto.EventCategory);
-            await _eventRepository.UpdateEventAsync(id, eventToUpdate, eventCategoryToUpdate);
+            await _eventService.UpdateEventAsync(id, eventToUpdate, eventCategoryToUpdate);
             return Ok(eventDto);
         }
         /// <summary>
@@ -51,7 +52,7 @@ namespace ETMS_API.Controllers
         [Route("{eventId}")]
         public IActionResult DeleteEvent([FromRoute] int eventId)
         {
-            _eventRepository.DeleteEvent(eventId);
+            _eventService.DeleteEvent(eventId);
             return Ok();
         }
         /// <summary>
@@ -61,7 +62,7 @@ namespace ETMS_API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetEvent(int id)
         {
-            var res = await _eventRepository.GetByIdAsync(id);
+            var res = await _eventService.GetEventByIdAsync(id);
             return Ok(res);
         }
         /// <summary>
@@ -70,7 +71,7 @@ namespace ETMS_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEvents()
         {
-            var res = await _eventRepository.GetEvents();
+            var res = await _eventService.GetEvents();
             return Ok(res);
         }
         /// <summary>
@@ -80,7 +81,7 @@ namespace ETMS_API.Controllers
         [Route("{id}/feedback")]
         public async Task<IActionResult> AddEventFeedback([FromRoute] int id, [FromBody] Feedback feedback)
         {
-            await _eventRepository.AddEventFeedbackAsync(id, feedback);
+            await _eventService.AddEventFeedbackAsync(id, feedback);
             return Ok();
         }
         /// <summary>
@@ -90,7 +91,7 @@ namespace ETMS_API.Controllers
         [Route("{eventId}/register/{userId}")]
         public async Task<IActionResult> RegisterForEvent([FromRoute] int eventId, string userId)
         {
-            await _eventRepository.RegisterForEventAsync(eventId, userId);
+            await _eventService.RegisterForEventAsync(eventId, userId);
             return Ok();
         }
     }
