@@ -2,6 +2,7 @@
 using Eams.Core.Domain;
 using Eams.Core.DTOs.EventCategory;
 using Eams.Data.Repositories.Interfaces;
+using Eams.Services.Attendee.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETMS_API.Controllers
@@ -11,11 +12,11 @@ namespace ETMS_API.Controllers
     [Produces("application/json")]
     public class CategoriesController : ControllerBase
     {
-        private IEventCategoryRepository _eventCategoryRepository;
+        private IEventCategoryService _eventCategoryService;
         private IMapper _mapper;
-        public CategoriesController(IEventCategoryRepository eventCategoryRepository, IMapper mapper)
+        public CategoriesController(IEventCategoryService eventCategoryService, IMapper mapper)
         {
-            _eventCategoryRepository = eventCategoryRepository;
+            _eventCategoryService = eventCategoryService;
             _mapper = mapper;
         }
 
@@ -28,7 +29,7 @@ namespace ETMS_API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var categoryToAdd = _mapper.Map<EventCategory>(categoryDto);
-            await _eventCategoryRepository.AddCategoryAsync(categoryToAdd);
+            await _eventCategoryService.AddCategoryAsync(categoryToAdd);
             return Ok(categoryToAdd);
         }
         /// <summary>
@@ -40,7 +41,7 @@ namespace ETMS_API.Controllers
         {
 
             var categoryToUpdate = _mapper.Map<EventCategory>(categoryDto);
-            await _eventCategoryRepository.UpdateCategoryAsync(id, categoryToUpdate);
+            await _eventCategoryService.UpdateCategoryAsync(id, categoryToUpdate);
             return Ok(categoryToUpdate);
         }
         /// <summary>
@@ -50,7 +51,7 @@ namespace ETMS_API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> DeleteEventCategory(int id)
         {
-            _eventCategoryRepository.DeleteCategoryAsync(id);
+            _eventCategoryService.DeleteCategoryAsync(id);
             return Ok();
         }
         /// <summary>
@@ -59,7 +60,7 @@ namespace ETMS_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {
-            var res = await _eventCategoryRepository.GetAllCategoriesAsync();
+            var res = await _eventCategoryService.GetAllCategoriesAsync();
             return Ok(res);
         }
         /// <summary>
@@ -69,7 +70,7 @@ namespace ETMS_API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetCategory([FromRoute] int id)
         {
-            var res = await _eventCategoryRepository.GetCategoryByIdAsync(id);
+            var res = await _eventCategoryService.GetCategoryByIdAsync(id);
             return Ok(res);
         }
 
